@@ -1,0 +1,566 @@
+/* ---------------------------------------------------------------
+   jessicamisener.com
+   Design tokens. Change colors/type here, not in the pages.
+   --------------------------------------------------------------- */
+
+:root {
+  /* Type. System fonts only — nothing to download, nothing to break.
+     To self-host a display face later, drop the files in /assets/fonts/,
+     add an @font-face block below, and change --font-display. */
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+    "Times New Roman", serif;
+  --font-body: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+    "Times New Roman", serif;
+  --font-ui: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+
+  --step--1: clamp(0.86rem, 0.83rem + 0.15vw, 0.94rem);
+  --step-0: clamp(1.05rem, 1rem + 0.25vw, 1.19rem);
+  --step-1: clamp(1.28rem, 1.18rem + 0.5vw, 1.55rem);
+  --step-2: clamp(1.6rem, 1.4rem + 1vw, 2.15rem);
+  --step-3: clamp(2rem, 1.6rem + 2vw, 3.1rem);
+
+  /* Color */
+  --bg: #fbfaf7;
+  --surface: #f3f1ea;
+  --text: #1c1b19;
+  --text-soft: #56534d;
+  --rule: #ddd9cd;
+  --accent: #8a3324; /* burnt sienna */
+  --accent-soft: #f0e2de;
+
+  /* Space */
+  --measure: 34rem;
+  --page-max: 46rem;
+  --gutter: clamp(1.25rem, 5vw, 2.5rem);
+  --flow: 1.1em;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161513;
+    --surface: #201f1c;
+    --text: #ece9e2;
+    --text-soft: #a8a49b;
+    --rule: #35332e;
+    --accent: #e8917c;
+    --accent-soft: #2e2320;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Reset-ish
+   --------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Vertical rhythm: space between siblings, no orphan margins. */
+.flow > * + * {
+  margin-top: var(--flow);
+}
+
+/* ---------------------------------------------------------------
+   Links & focus
+   --------------------------------------------------------------- */
+
+a {
+  color: inherit;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 0.06em;
+  transition: color 0.12s ease, background-color 0.12s ease;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  z-index: 10;
+}
+
+.skip-link:focus {
+  left: 0;
+  color: #fff;
+}
+
+/* ---------------------------------------------------------------
+   Layout
+   --------------------------------------------------------------- */
+
+.wrap {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+main {
+  padding-block: clamp(2.5rem, 7vw, 4.5rem);
+}
+
+main > * + * {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+/* ---------------------------------------------------------------
+   Header / nav
+   --------------------------------------------------------------- */
+
+.site-header {
+  border-bottom: 1px solid var(--rule);
+  padding-block: 1.15rem;
+}
+
+.site-header .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem 1.5rem;
+}
+
+.site-name {
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+
+.site-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.15rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+}
+
+.site-nav a {
+  text-decoration: none;
+  color: var(--text-soft);
+  padding-block: 0.15rem;
+}
+
+.site-nav a:hover {
+  color: var(--accent);
+}
+
+.site-nav a[aria-current="page"] {
+  color: var(--text);
+  box-shadow: inset 0 -2px 0 0 var(--accent);
+}
+
+/* ---------------------------------------------------------------
+   Headings & prose
+   --------------------------------------------------------------- */
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--step-3);
+}
+
+h2 {
+  font-size: var(--step-2);
+}
+
+h3 {
+  font-size: var(--step-1);
+}
+
+p,
+li {
+  max-width: var(--measure);
+  text-wrap: pretty;
+}
+
+.lede {
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.muted {
+  color: var(--text-soft);
+}
+
+.kicker {
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin: 0 0 0.6rem;
+}
+
+.section-rule {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin-block: 0;
+}
+
+/* ---------------------------------------------------------------
+   Home: the two doors
+   --------------------------------------------------------------- */
+
+.doors {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 40rem) {
+  .doors {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.door {
+  display: block;
+  padding: 1.35rem 1.4rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.door:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.door h2 {
+  font-size: var(--step-1);
+  margin-bottom: 0.35rem;
+}
+
+.door p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: var(--step--1);
+  font-family: var(--font-ui);
+  line-height: 1.5;
+  max-width: none;
+}
+
+.door .door-cue {
+  color: var(--accent);
+}
+
+/* Proof points. Flex gaps rather than interpunct separators, so a wrapped
+   line never begins with an orphaned "·". */
+.proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.5rem;
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  color: var(--text-soft);
+  line-height: 1.7;
+  max-width: none;
+}
+
+.proof span {
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------
+   Lists of things: clips, books, projects
+   --------------------------------------------------------------- */
+
+.entry-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.entry-list > li {
+  max-width: none;
+  padding-block: 1.35rem;
+  border-top: 1px solid var(--rule);
+}
+
+.entry-list > li:first-child {
+  border-top: 0;
+  padding-top: 0.4rem;
+}
+
+.entry-title {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  line-height: 1.25;
+  margin: 0 0 0.3rem;
+  font-weight: 600;
+}
+
+.entry-meta {
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  color: var(--text-soft);
+  margin: 0 0 0.45rem;
+}
+
+.entry-meta .outlet {
+  color: var(--text);
+}
+
+.entry-list p {
+  margin: 0;
+}
+
+.entry-list .blurb {
+  color: var(--text-soft);
+  font-size: var(--step--1);
+  line-height: 1.6;
+  font-family: var(--font-ui);
+}
+
+/* Books */
+.book {
+  display: grid;
+  gap: 1.1rem 1.8rem;
+  grid-template-columns: 1fr;
+  align-items: start;
+  padding-block: 2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.book:first-of-type {
+  border-top: 0;
+  padding-top: 0.4rem;
+}
+
+@media (min-width: 34rem) {
+  .book {
+    grid-template-columns: 11rem 1fr;
+  }
+}
+
+.book-cover {
+  width: 100%;
+  max-width: 11rem;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  background: var(--surface);
+}
+
+.book-cover.placeholder {
+  aspect-ratio: 2 / 3;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  color: var(--text-soft);
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Projects */
+.cards {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 44rem) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.35rem 1.4rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  max-width: none;
+}
+
+.card h3 {
+  margin: 0;
+}
+
+.card p {
+  margin: 0;
+  max-width: none;
+  font-size: var(--step--1);
+  font-family: var(--font-ui);
+  line-height: 1.55;
+  color: var(--text-soft);
+}
+
+.card .role {
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  color: var(--accent);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  list-style: none;
+  margin: 0.15rem 0 0;
+  padding: 0;
+}
+
+.tags li {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  color: var(--text-soft);
+  border: 1px solid var(--rule);
+  border-radius: 100px;
+  padding: 0.12rem 0.55rem;
+  max-width: none;
+}
+
+.card-links {
+  margin-top: auto;
+  padding-top: 0.35rem;
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+}
+
+.card-links a + a {
+  margin-left: 0.9rem;
+}
+
+/* ---------------------------------------------------------------
+   Clip filter (the site's only JS; works fine without it)
+   --------------------------------------------------------------- */
+
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+}
+
+.filter label {
+  color: var(--text-soft);
+}
+
+.filter select {
+  font: inherit;
+  font-family: var(--font-ui);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.35rem 0.5rem;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ---------------------------------------------------------------
+   Placeholder callout — delete these blocks as real content lands
+   --------------------------------------------------------------- */
+
+.todo {
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  line-height: 1.55;
+  color: var(--text-soft);
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 3px 3px 0;
+  padding: 0.85rem 1rem;
+  max-width: none;
+}
+
+/* ---------------------------------------------------------------
+   Footer
+   --------------------------------------------------------------- */
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  padding-block: 2rem 2.5rem;
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  color: var(--text-soft);
+}
+
+.site-footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+  margin: 0 0 0.9rem;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer p {
+  margin: 0;
+  max-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
