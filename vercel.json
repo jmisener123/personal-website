@@ -3,19 +3,51 @@
   "cleanUrls": true,
   "trailingSlash": true,
   "redirects": [
-    { "source": "/book", "destination": "/writing/books/", "permanent": true },
     {
-      "source": "/book/:path*",
+      "source": "/book",
       "destination": "/writing/books/",
       "permanent": true
     },
-    { "source": "/clips", "destination": "/writing/", "permanent": true },
     {
-      "source": "/clips/:path*",
+      "source": "/book/",
+      "destination": "/writing/books/",
+      "permanent": true
+    },
+    {
+      "source": "/book/:path+",
+      "destination": "/writing/books/",
+      "permanent": true
+    },
+    {
+      "source": "/clips",
       "destination": "/writing/",
       "permanent": true
     },
-    { "source": "/speechwriting", "destination": "/writing/", "permanent": true }
+    {
+      "source": "/clips/",
+      "destination": "/writing/",
+      "permanent": true
+    },
+    {
+      "source": "/clips/:path+",
+      "destination": "/writing/",
+      "permanent": true
+    },
+    {
+      "source": "/speechwriting",
+      "destination": "/writing/",
+      "permanent": true
+    },
+    {
+      "source": "/speechwriting/",
+      "destination": "/writing/",
+      "permanent": true
+    },
+    {
+      "source": "/speechwriting/:path+",
+      "destination": "/writing/",
+      "permanent": true
+    }
   ],
   "headers": [
     {
@@ -30,8 +62,14 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
         {
           "key": "Strict-Transport-Security",
           "value": "max-age=31536000; includeSubDomains"
