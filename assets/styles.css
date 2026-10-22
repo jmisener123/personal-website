@@ -299,23 +299,6 @@ li {
   color: var(--accent);
 }
 
-/* Proof points. Flex gaps rather than interpunct separators, so a wrapped
-   line never begins with an orphaned "·". */
-.proof {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem 1.5rem;
-  font-family: var(--font-ui);
-  font-size: var(--step--1);
-  color: var(--text-soft);
-  line-height: 1.7;
-  max-width: none;
-}
-
-.proof span {
-  white-space: nowrap;
-}
-
 /* ---------------------------------------------------------------
    Lists of things: clips, books, projects
    --------------------------------------------------------------- */
@@ -367,6 +350,66 @@ li {
   font-family: var(--font-ui);
 }
 
+/* Contact form */
+.contact-form {
+  display: grid;
+  gap: 1rem;
+  max-width: var(--measure);
+  padding: 1.35rem 1.4rem;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+}
+
+.form-field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.form-field label,
+.contact-form button {
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  font: inherit;
+  line-height: 1.5;
+}
+
+.form-field textarea {
+  resize: vertical;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: var(--accent);
+  outline: 2px solid var(--accent-soft);
+  outline-offset: 1px;
+}
+
+.contact-form button {
+  justify-self: start;
+  padding: 0.6rem 0.9rem;
+  color: #fff;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  color: var(--text);
+  background: var(--accent-soft);
+}
+
 /* Books */
 .book {
   display: grid;
@@ -382,11 +425,9 @@ li {
   padding-top: 0.4rem;
 }
 
-@media (min-width: 34rem) {
-  .book {
-    grid-template-columns: 11rem 1fr;
-  }
-}
+/* Two columns once there's cover art to put in the first one:
+   @media (min-width: 34rem) { .book { grid-template-columns: 11rem 1fr; } }
+   Text-only for now, so a single column is correct. */
 
 .book-cover {
   width: 100%;
@@ -394,17 +435,6 @@ li {
   border: 1px solid var(--rule);
   border-radius: 2px;
   background: var(--surface);
-}
-
-.book-cover.placeholder {
-  aspect-ratio: 2 / 3;
-  display: grid;
-  place-items: center;
-  font-family: var(--font-ui);
-  font-size: var(--step--1);
-  color: var(--text-soft);
-  text-align: center;
-  padding: 1rem;
 }
 
 /* Projects */
@@ -485,32 +515,8 @@ li {
 }
 
 /* ---------------------------------------------------------------
-   Clip filter (the site's only JS; works fine without it)
+   Utilities
    --------------------------------------------------------------- */
-
-.filter {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.6rem;
-  font-family: var(--font-ui);
-  font-size: var(--step--1);
-}
-
-.filter label {
-  color: var(--text-soft);
-}
-
-.filter select {
-  font: inherit;
-  font-family: var(--font-ui);
-  color: var(--text);
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: 3px;
-  padding: 0.35rem 0.5rem;
-}
 
 [hidden] {
   display: none !important;
@@ -519,18 +525,6 @@ li {
 /* ---------------------------------------------------------------
    Placeholder callout — delete these blocks as real content lands
    --------------------------------------------------------------- */
-
-.todo {
-  font-family: var(--font-ui);
-  font-size: var(--step--1);
-  line-height: 1.55;
-  color: var(--text-soft);
-  background: var(--accent-soft);
-  border-left: 3px solid var(--accent);
-  border-radius: 0 3px 3px 0;
-  padding: 0.85rem 1rem;
-  max-width: none;
-}
 
 /* ---------------------------------------------------------------
    Footer

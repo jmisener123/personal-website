@@ -33,7 +33,6 @@
             <li><a href="/writing/">Writing</a></li>
             <li><a href="/work/">Work</a></li>
             <li><a href="/about/">About</a></li>
-            <li><a href="/now/">Now</a></li>
             <li><a href="/contact/" aria-current="page">Contact</a></li>
           </ul>
         </nav>
@@ -43,20 +42,42 @@
     <main id="main">
       <section class="wrap flow">
         <h1>Contact</h1>
-        <p class="lede">
-          Email is best. I read everything, and I answer most of it.
-        </p>
+        <!--
+          Web3Forms. No backend, no JavaScript. Submissions are emailed to the
+          address registered with Web3Forms.
+
+          The access key is safe in public HTML: it only lets someone send mail
+          TO you, and it never reveals your address. If you start getting spam,
+          restrict the key to this domain in the Web3Forms dashboard.
+
+          `redirect` points at the production domain, so testing from a Vercel
+          preview URL will land the sender on jessicamisener.com/thanks/.
+        -->
+        <form
+          class="contact-form"
+          action="https://api.web3forms.com/submit"
+          method="post"
+        >
+          <input type="hidden" name="access_key" value="6d32d529-5659-411c-a26c-708165f2a008" />
+          <input type="hidden" name="subject" value="jessicamisener.com — new message" />
+          <input type="hidden" name="from_name" value="jessicamisener.com" />
+          <input type="hidden" name="redirect" value="https://jessicamisener.com/thanks/" />
+          <input type="checkbox" name="botcheck" class="hidden" style="display: none" />
+          <div class="form-field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required />
+          </div>
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="form-field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+          </div>
+          <button type="submit">Send message</button>
+        </form>
         <ul class="entry-list">
-          <li>
-            <h2 class="entry-title">
-              <a href="mailto:hello@jessicamisener.com"
-                >hello@jessicamisener.com</a
-              >
-            </h2>
-            <p class="blurb">
-              Assignments, speaking, consulting, or a note about the books.
-            </p>
-          </li>
           <li>
             <h2 class="entry-title">
               <a
@@ -73,22 +94,16 @@
                 >GitHub</a
               >
             </h2>
-            <p class="blurb">Code, including the source of this site.</p>
+            <p class="blurb">Projects, including the source of this site.</p>
           </li>
         </ul>
-        <p class="todo">
-          <strong>Jessica:</strong> confirm the email address — I used
-          <code>hello@jessicamisener.com</code> as a placeholder in the footer
-          of every page. If it's different, search and replace across all eight
-          HTML files.
-        </p>
       </section>
     </main>
 
     <footer class="site-footer">
       <div class="wrap">
         <ul>
-          <li><a href="mailto:hello@jessicamisener.com">Email</a></li>
+          <li><a href="/contact/">Contact</a></li>
           <li>
             <a
               href="https://www.linkedin.com/in/jessicamisener/"

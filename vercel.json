@@ -9,10 +9,10 @@
       "destination": "/writing/books/",
       "permanent": true
     },
-    { "source": "/clips", "destination": "/writing/clips/", "permanent": true },
+    { "source": "/clips", "destination": "/writing/", "permanent": true },
     {
       "source": "/clips/:path*",
-      "destination": "/writing/clips/",
+      "destination": "/writing/",
       "permanent": true
     },
     { "source": "/speechwriting", "destination": "/writing/", "permanent": true }
